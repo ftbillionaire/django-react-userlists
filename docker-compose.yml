@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:10.3
+    ports: 
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: 'task_db'
+      MYSQL_USER: 'root'
+      MYSQL_ROOT_PASSWORD: 'password'
+  
+  djangoapp:
+    build: ./backend
+    command: python manage.py runserver 0.0.0.0:8080
+    volumes: 
+      - ./backend:/app/backend
+    ports:
+      - "8080:8080"
+    depends_on: 
+      - db
+  
+  frontend:
+    tty: true
+    build: ./frontend
+    command: npm start
+    volumes:
+      - ./frontend:/app/frontend
+      - ./frontend/node_modules:/app/frontend/node_modules
+    ports:
+      - "3000:3000"
