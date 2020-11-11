@@ -19,8 +19,13 @@ In order to run container you should have docker being installed
 ```shell
 git clone https://nazar_eng@bitbucket.org/nazar_eng/task-project.git
 ```
-* Then, make sure that you have * [Python](https://www.python.org/downloads/) and * [npm](https://www.npmjs.com/get-npm) installed on your computer
+
 * Set your MySQL data in `docker-compose.yml` file
+* In order to build react app for production, enter the next commands:
+```shell
+docker-compose exec frontend sh
+npm run build
+```
 * After that, open a terminal in directory where docker-compose.yml is located, and start a new container:
 
 ```shell

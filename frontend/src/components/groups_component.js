@@ -17,21 +17,21 @@ export default class Groups extends React.Component{
       this.checkUser = this.checkUser.bind(this);
     }
     fetchTasks(){
-      fetch('http://0.0.0.0:8080/api/groups/')
+      fetch('172.23.0.1:80/api/groups/')
         .then(response=>response.json())
         .then(result=>this.setState({
           data: result
         })).catch(error=>console.log(error))
     }
     componentDidMount(){
-      fetch('http://0.0.0.0:8080/api/groups/')
+      fetch('http://172.23.0.1:80/api/groups/')
         .then(response=>response.json())
         .then(result=>{
           this.setState({data:result});
           console.log(result);
         })
 
-      fetch('http://0.0.0.0:8080/api/users/')
+      fetch('http://172.23.0.1:80/api/users/')
         .then(response=>response.json())
         .then(result=>{
           this.setState({users:result});
@@ -53,7 +53,7 @@ export default class Groups extends React.Component{
     }
 
     handleSubmit(){
-      fetch('http://0.0.0.0:8080/api/groups/create/', {
+      fetch('http://172.23.0.1:80/api/groups/create/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ export default class Groups extends React.Component{
     }
 
     deleteGroup(obj){
-      fetch(`http://0.0.0.0:8080/api/groups/delete/${obj.id}/`, {
+      fetch(`http://http://172.23.0.1:80/api/groups/delete/${obj.id}/`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -78,7 +78,7 @@ export default class Groups extends React.Component{
     }
 
     updateGroup(obj){
-      fetch(`http://0.0.0.0:8080/api/groups/update/${obj.id}/`, {
+      fetch(`http://172.23.0.1:80/api/groups/update/${obj.id}/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -17,7 +17,7 @@ export default class Users extends React.Component{
     }
 
     fetchTasks(){
-        fetch("http://0.0.0.0:8080/api/users/")
+        fetch("http://172.23.0.1:80/api/users/")
         .then(response=>response.json())
         .then(result=> {
             this.setState({data:result})
@@ -25,14 +25,14 @@ export default class Users extends React.Component{
     }
 
     componentDidMount(){
-      fetch("http://0.0.0.0:8080/api/users/")
+      fetch("http://172.23.0.1:80/api/users/")
         .then(response=>response.json())
         .then(result=> {
           this.setState({data:result});
           console.log(result)
         }).catch(error=>console.log(error))
       
-      fetch("http://0.0.0.0:8080/api/groups/")
+      fetch("http://172.23.0.1:80/api/groups/")
         .then(response=>response.json())
         .then(result=> {
           this.setState({groups:result});
@@ -62,7 +62,7 @@ export default class Users extends React.Component{
     }
   
     handleSubmit(){
-      fetch('http://0.0.0.0:8080/api/users/create/', {
+      fetch('http://172.23.0.1:80/api/users/create/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ export default class Users extends React.Component{
     }
 
     updateUser(obj){
-        fetch(`http://0.0.0.0:8080/api/users/update/${obj.id}/`, {
+        fetch(`http:/172.23.0.1:80/api/users/update/${obj.id}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -91,7 +91,7 @@ export default class Users extends React.Component{
     }
 
     deleteUser(obj){
-        fetch(`http://0.0.0.0:8080/api/users/delete/${obj.id}/`, {
+        fetch(`http://172.23.0.1:80/api/users/delete/${obj.id}/`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
