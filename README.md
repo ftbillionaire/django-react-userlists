@@ -26,7 +26,7 @@ git clone https://nazar_eng@bitbucket.org/nazar_eng/task-project.git
 docker-compose exec frontend sh
 npm run build
 ```
-* After that, open a terminal in directory where docker-compose.yml is located, and start a new container:
+* After that, open a terminal in directory where `docker-compose.yml` is located, and start a new container:
 
 ```shell
 docker-compose up
