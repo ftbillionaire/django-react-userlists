@@ -5,4 +5,5 @@ djangorestframework==3.11.1
 gunicorn==20.0.4
 mysqlclient==2.0.1
 pytz==2020.1
+redis==3.5.3
 sqlparse==0.3.1

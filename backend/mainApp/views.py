@@ -68,3 +68,4 @@ def deleteGroup(request, pk):
     group.delete()
 
     return Response('Successful operation!')
+
