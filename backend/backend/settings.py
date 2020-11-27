@@ -36,8 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery_email',
     'corsheaders',
     'rest_framework',
+    'celery',
     'mainApp',
 ]
 
@@ -127,12 +129,29 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-    'var/www/static'
-]
+STATIC_ROOT = BASE_DIR / 'static'
+
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "http://127.0.0.1:3000"
 ]
+
+CELERY_EMAIL_TASK_CONFIG = {
+    'name': 'djcelery_email',
+    'ignore_results': False
+}
+
+CELERY_BROKER_URL = 'redis://redis-broker:6379'
+CELERY_RESULT_BACKEND = 'redis://redis-broker:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'mysholivsky2003@gmail.com'
+EMAIL_HOST_PASSWORD = 'pp_141_Z_118_tech'

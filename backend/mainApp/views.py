@@ -1,13 +1,25 @@
 from django.shortcuts import render
+from django.conf import settings
+from django.core.mail import send_mail
+from django.contrib.auth.models import User, Group
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView, RetrieveAPIView
-from django.contrib.auth.models import User, Group
+
 from .serializers import UserSerializer, GroupSerializer
+from .tasks import sendEmail
 # Create your views here.
 def main(request):
     return render(request, 'mainApp/index.html')
+
+def email_send(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        text = request.POST.get('text')
+        sendEmail.delay(name, email, text)
+        return render(request, 'mainApp/success.html')
 
 class UserView(ListAPIView):
     serializer_class = UserSerializer

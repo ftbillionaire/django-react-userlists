@@ -5,6 +5,22 @@
 {% endblock %}
 
 {% block content %}
-    <h1>API task</h1>
-    <h2><a href="/app">Click to redirect to our service</a></h2>
+    <h1 class="col-sm-12">API task</h1>
+    <h2 class="col-sm-12"><a href="/lists">Click to redirect to our service</a></h2>
+    <div class="col-sm-6 mt-5">
+        <h2>Send email</h2>
+        <form action="{% url 'email_send' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" type="text" name="name" placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <textarea style="resize: none;" class="form-control" id="exampleFormControlTextarea1" name="text" rows="3" placeholder="Text" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 {% endblock %}

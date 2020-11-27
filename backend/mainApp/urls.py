@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/groups/create/', views.createGroup),
     path('api/groups/update/<int:pk>/', views.updateGroup),
     path('api/groups/delete/<int:pk>/', views.deleteGroup),
+    path('email-send/', views.email_send, name="email_send")
 ]

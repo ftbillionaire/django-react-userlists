@@ -12,7 +12,7 @@ services:
     networks:
       - database1_network
 
-  djangoapp:
+  djangoapp: &djangoapp
     build: ./backend
     volumes: 
       - ./backend:/app/backend
@@ -32,6 +32,7 @@ services:
       - ./nginx/404.html:/usr/share/nginx/html/404.html
       - ./nginx/images:/app/frontend/images
       - ./frontend/build:/app/frontend
+      - ./backend/static:/var/www/static
     networks:
       - nginx_network
   
@@ -45,7 +46,7 @@ services:
   #   ports:
   #     - "3000:3000"
 
-  redis:
+  redis-broker:
     image: redis
     ports:
       - "6379:6379"
@@ -53,6 +54,13 @@ services:
       - djangoapp
     networks:
       - cache_network
+  
+  celery-worker:
+    <<: *djangoapp
+    command: celery -A backend worker -l INFO
+    depends_on:
+      - redis-broker
+      - db
 
 networks:
   nginx_network:
